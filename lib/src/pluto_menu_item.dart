@@ -16,6 +16,9 @@ class PlutoMenuItem {
   /// Menu title
   final String title;
 
+  // Menu Item Height
+  final double height;
+
   final IconData? icon;
 
   final bool enable;
@@ -28,6 +31,7 @@ class PlutoMenuItem {
 
   PlutoMenuItem({
     required this.title,
+    this.height = kMinInteractiveDimension,
     this.icon,
     this.enable = true,
     this.onTap,
@@ -38,6 +42,7 @@ class PlutoMenuItem {
 
   factory PlutoMenuItem.checkbox({
     required String title,
+    double height = kMinInteractiveDimension,
     IconData? icon,
     bool enable = false,
     void Function()? onTap,
@@ -53,11 +58,13 @@ class PlutoMenuItem {
       children: children,
       onChanged: onChanged,
       initialCheckValue: initialCheckValue,
+      height: height,
     );
   }
 
   static PlutoMenuItem radio({
     required String title,
+    double height = kMinInteractiveDimension,
     IconData? icon,
     bool enable = false,
     void Function()? onTap,
@@ -68,6 +75,7 @@ class PlutoMenuItem {
   }) {
     return PlutoMenuItemRadio(
       title: title,
+      height: kMinInteractiveDimension,
       icon: icon,
       enable: enable,
       onTap: onTap,
@@ -96,12 +104,14 @@ class PlutoMenuItem {
 
   PlutoMenuItem._back({
     required this.title,
+    double height = kMinInteractiveDimension,
     this.children,
   })  : icon = null,
         enable = true,
         onTap = null,
         _key = GlobalKey(),
-        _isBack = true;
+        _isBack = true,
+        height = height;
 
   PlutoMenuItemType get type => PlutoMenuItemType.button;
 
@@ -142,6 +152,7 @@ class PlutoMenuItem {
 class PlutoMenuItemCheckbox extends PlutoMenuItem {
   PlutoMenuItemCheckbox({
     required super.title,
+    super.height,
     super.icon,
     super.enable = true,
     super.onTap,
@@ -160,6 +171,7 @@ class PlutoMenuItemCheckbox extends PlutoMenuItem {
 class PlutoMenuItemRadio extends PlutoMenuItem {
   PlutoMenuItemRadio({
     required super.title,
+    super.height,
     super.icon,
     super.enable = true,
     super.onTap,
@@ -182,7 +194,7 @@ class PlutoMenuItemRadio extends PlutoMenuItem {
 
 class PlutoMenuItemDivider extends PlutoMenuItem {
   PlutoMenuItemDivider({
-    this.height = 16.0,
+    super.height,
     this.color,
     this.indent,
     this.endIndent,
@@ -190,8 +202,6 @@ class PlutoMenuItemDivider extends PlutoMenuItem {
   }) : super(title: '_divider', enable: false);
 
   PlutoMenuItemType get type => PlutoMenuItemType.divider;
-
-  final double height;
 
   final Color? color;
 

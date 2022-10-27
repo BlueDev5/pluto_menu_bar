@@ -293,7 +293,7 @@ class _MenuWidgetState extends State<_MenuWidget> {
       ),
       items: items.map((menu) {
         Widget menuItem;
-        double height = kMinInteractiveDimension;
+        double height = menu.height;
         EdgeInsets? padding;
 
         switch (menu.type) {
@@ -308,7 +308,6 @@ class _MenuWidgetState extends State<_MenuWidget> {
             break;
           case PlutoMenuItemType.divider:
             menuItem = _buildDividerItem(menu as PlutoMenuItemDivider);
-            height = menu.height;
             padding = EdgeInsets.only(left: 0, right: 0);
             break;
         }
